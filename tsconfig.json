@@ -1,17 +1,19 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "jsx": "react",
+    "target": "es6",
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "commonjs",
+    "lib": ["es2018", "dom"],
+    "moduleResolution": "node",
+    "strict": true,
+    "pretty": true,
     "declaration": true,
     "importHelpers": true,
-    "lib": ["es2018", "dom"],
-    "module": "es6",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
     "noUnusedLocals": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es6"
+    "esModuleInterop": true
   },
-  "exclude": ["dist/**/*"]
+  "exclude": ["node_modules", "dist"]
 }

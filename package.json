@@ -1,23 +1,51 @@
 {
   "name": "react-firebase-pagination-hooks",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "license": "MIT",
   "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "yarn lint --fix",
+    "clean": "rimraf dist",
     "build:cjs": "tsc",
     "build:es": "tsc -m esNext --outDir ./dist/esm",
-    "build": "yarn build:cjs && yarn build:es",
-    "clean": "rimraf dist"
+    "build": "yarn build:cjs && yarn build:es"
   },
   "dependencies": {},
   "devDependencies": {
     "@types/react": "^16.9.41",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.1.3",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
     "firebase": "^7.15.5",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "rimraf": "^3.0.2",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "react": "16.13.1"
   },
   "peerDependencies": {
-    "react": "^16.13.1"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn lint && yarn clean && yarn build"
+    }
   }
 }
