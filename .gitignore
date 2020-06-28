@@ -1,0 +1,10 @@
+# yarn
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
+
+# modules
+node_modules/
+
+# build output
+dist
