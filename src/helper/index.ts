@@ -1,3 +1,4 @@
+// https://github.com/CSFrequency/react-firebase-hooks/blob/master/firestore/helpers/index.ts
 import { firestore } from "firebase";
 
 export const snapshotToData = (

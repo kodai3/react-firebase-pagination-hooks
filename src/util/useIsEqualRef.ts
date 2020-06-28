@@ -1,3 +1,4 @@
+// ommited useComparatorRef
 // https://github.com/CSFrequency/react-firebase-hooks/blob/master/util/refHooks.ts
 import * as React from "react";
 

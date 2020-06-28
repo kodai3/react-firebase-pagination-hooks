@@ -6,7 +6,7 @@
   "files": [
     "dist/"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint src/**/*.ts",
     "lint:fix": "yarn lint --fix",
