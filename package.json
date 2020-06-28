@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
+  "files": [
+    "dist/"
+  ],
   "license": "MIT",
   "scripts": {
     "lint": "eslint src/**/*.ts",
@@ -10,7 +13,8 @@
     "clean": "rimraf dist",
     "build:cjs": "tsc",
     "build:es": "tsc -m esNext --outDir ./dist/esm",
-    "build": "yarn build:cjs && yarn build:es"
+    "build": "yarn build:cjs && yarn build:es",
+    "pre-release": "yarn clean && yarn build"
   },
   "dependencies": {},
   "devDependencies": {
