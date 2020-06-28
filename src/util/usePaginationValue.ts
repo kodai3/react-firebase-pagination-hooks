@@ -15,14 +15,14 @@ type ReducerState = {
   error?: Error;
 };
 
-export type PagenationValue = ReducerState & {
+export type PaginationValue = ReducerState & {
   loadMore: () => void;
   reest: () => void;
   setError: (error: Error) => void;
   setValue: (limit: number) => (value: firestore.QuerySnapshot) => void;
 };
 
-export type PagenationHook<T> = [
+export type PaginationHook<T> = [
   T[],
   {
     loaded: boolean;
@@ -112,7 +112,7 @@ function reducer(state: ReducerState, action: ActionType): ReducerState {
   }
 }
 
-const usePagenationValue = (): PagenationValue => {
+const usePaginationValue = (): PaginationValue => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const loadMore = () => {
@@ -140,4 +140,4 @@ const usePagenationValue = (): PagenationValue => {
   };
 };
 
-export default usePagenationValue;
+export default usePaginationValue;

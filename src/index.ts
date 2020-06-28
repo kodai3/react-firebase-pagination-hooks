@@ -1,1 +1,1 @@
-export { usePagenation, usePagenationData } from "./usePagenation";
+export { usePagination, usePaginationData } from "./usePagination";

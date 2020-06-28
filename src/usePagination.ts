@@ -2,19 +2,19 @@ import { firestore } from "firebase";
 import * as React from "react";
 import { snapshotToData } from "./helper";
 import useIsEqualRef from "./util/useIsEqualRef";
-import usePagenationValue, { PagenationHook } from "./util/usePagenationValue";
+import usePaginationValue, { PaginationHook } from "./util/usePaginationValue";
 
 const { useEffect, useMemo } = React;
 
 const DEFAULT_LIMIT = 20;
 
-export const usePagenation = (
+export const usePagination = (
   query?: firestore.Query | null,
   options?: {
     snapshotListenOptions?: firestore.SnapshotListenOptions;
     limit?: number;
   }
-): PagenationHook<firestore.DocumentSnapshot> => {
+): PaginationHook<firestore.DocumentSnapshot> => {
   const {
     loaded,
     loadingMore,
@@ -27,7 +27,7 @@ export const usePagenation = (
     after,
     loadMore,
     hasMore,
-  } = usePagenationValue();
+  } = usePaginationValue();
 
   const ref = useIsEqualRef(query, reest);
 
@@ -59,17 +59,17 @@ export const usePagenation = (
   ];
 };
 
-export const usePagenationData = <T>(
+export const usePaginationData = <T>(
   query?: firestore.Query | null,
   options?: {
     idField?: string;
     limit?: number;
     snapshotListenOptions?: firestore.SnapshotListenOptions;
   }
-): PagenationHook<T> => {
+): PaginationHook<T> => {
   const idField = options ? options.idField : undefined;
 
-  const [snapshot, fields, error] = usePagenation(query, {
+  const [snapshot, fields, error] = usePagination(query, {
     snapshotListenOptions: options?.snapshotListenOptions,
     limit: options?.limit,
   });
