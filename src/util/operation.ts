@@ -5,7 +5,7 @@ const findIndexOfDocument = (
   items: firestore.DocumentData[]
 ): number =>
   items.findIndex((item) => {
-    return item.id === doc.id;
+    return item.ref.path === doc.ref.path;
   });
 
 export const updateItem = (
