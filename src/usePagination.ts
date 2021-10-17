@@ -7,12 +7,14 @@ import usePaginationValue, { PaginationHook } from "./util/usePaginationValue";
 const { useEffect, useMemo } = React;
 
 const DEFAULT_LIMIT = 20;
+const DEFAULT_POS = "end";
 
 export const usePagination = (
   query?: firestore.Query | null,
   options?: {
     snapshotListenOptions?: firestore.SnapshotListenOptions;
     limit?: number;
+    pos?: "start" | "end"
   }
 ): PaginationHook<firestore.DocumentSnapshot> => {
   const {
@@ -37,12 +39,13 @@ export const usePagination = (
     }
 
     const stepLimit = options?.limit || DEFAULT_LIMIT;
+    const pos = options?.pos || DEFAULT_POS;
     const queryLimited = ref.current.limit(limit || stepLimit);
 
     const snapshotOption = options?.snapshotListenOptions;
     const listener = snapshotOption
-      ? queryLimited.onSnapshot(snapshotOption, setValue(stepLimit), setError)
-      : queryLimited.onSnapshot(setValue(stepLimit), setError);
+      ? queryLimited.onSnapshot(snapshotOption, setValue(stepLimit, pos), setError)
+      : queryLimited.onSnapshot(setValue(stepLimit, pos), setError);
 
     return () => listener();
   }, [ref.current, after]);

@@ -26,10 +26,15 @@ export const deleteItem = (
 
 export const addItem = (
   doc: firestore.QueryDocumentSnapshot,
-  items: firestore.DocumentData[]
+  items: firestore.DocumentData[],
+  pos: "start" | "end"
 ): void => {
   const i = findIndexOfDocument(doc, items);
   if (i === -1) {
-    items.push(doc);
+    if(pos === "end") {
+      items.push(doc);
+    } else {
+      items.unshift(doc)
+    }
   }
 };
