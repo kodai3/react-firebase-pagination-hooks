@@ -19,7 +19,7 @@ export type PaginationValue = ReducerState & {
   loadMore: () => void;
   reest: () => void;
   setError: (error: Error) => void;
-  setValue: (limit: number) => (value: firestore.QuerySnapshot) => void;
+  setValue: (limit: number, pos: "start" | "end") => (value: firestore.QuerySnapshot) => void;
 };
 
 export type PaginationHook<T> = [
@@ -50,6 +50,7 @@ type LoadedAction = {
   type: "loaded";
   value: firestore.QuerySnapshot;
   limit: number;
+  pos: "start" | "end"
 };
 export type ActionType =
   | LoadMoreAction
@@ -66,7 +67,7 @@ function reducer(state: ReducerState, action: ActionType): ReducerState {
       action.value.docChanges().forEach((change) => {
         if (change.type === "added") {
           isAdding = true;
-          addItem(change.doc, value);
+          addItem(change.doc, value, action.pos);
         } else if (change.type === "modified") {
           updateItem(change.doc, value);
         } else if (change.type === "removed") {
@@ -119,8 +120,8 @@ const usePaginationValue = (): PaginationValue => {
     dispatch({ type: "loadMore" });
   };
 
-  const setValue = (limit: number) => (value: firestore.QuerySnapshot) => {
-    dispatch({ type: "loaded", value, limit });
+  const setValue = (limit: number, pos: "start" | "end") => (value: firestore.QuerySnapshot) => {
+    dispatch({ type: "loaded", value, limit, pos });
   };
 
   const setError = (error: Error) => {
